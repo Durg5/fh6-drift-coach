@@ -6,14 +6,14 @@
 
 **Self-hosted Forza Horizon 6 / FH5 telemetry dashboard + AI drift-tuning coach.**
 
-[![Release](https://img.shields.io/github/v/release/Durg5/drift-coach?style=flat-square&color=ff5500&label=release)](https://github.com/Durg5/drift-coach/releases/latest)
-[![CI](https://img.shields.io/github/actions/workflow/status/Durg5/drift-coach/ci.yml?style=flat-square&label=build)](https://github.com/Durg5/drift-coach/actions/workflows/ci.yml)
-[![License](https://img.shields.io/github/license/Durg5/drift-coach?style=flat-square&color=00ccff)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Durg5/fh6-drift-coach?style=flat-square&color=ff5500&label=release)](https://github.com/Durg5/fh6-drift-coach/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/Durg5/fh6-drift-coach/ci.yml?style=flat-square&label=build)](https://github.com/Durg5/fh6-drift-coach/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/Durg5/fh6-drift-coach?style=flat-square&color=00ccff)](LICENSE)
 [![Stack](https://img.shields.io/badge/stack-Nuxt%204%20%C2%B7%20Tauri%202-040206?style=flat-square)](#stack)
 
 Records sessions, builds a per-car dyno from your runs, and feeds everything to an LLM (Ollama, Claude, OpenAI) that knows drift tuning specifically.
 
-[**Download installer**](https://github.com/Durg5/drift-coach/releases/latest) · [**Quick start**](#quick-start-5-minutes-from-clone-to-driving) · [**First clean run guide**](#your-first-clean-run--step-by-step) · [**What weird features do**](#what-the-weird-named-features-actually-do)
+[**Download installer**](https://github.com/Durg5/fh6-drift-coach/releases/latest) · [**Quick start**](#quick-start-5-minutes-from-clone-to-driving) · [**First clean run guide**](#your-first-clean-run--step-by-step) · [**What weird features do**](#what-the-weird-named-features-actually-do)
 
 </div>
 
@@ -28,7 +28,7 @@ Records sessions, builds a per-car dyno from your runs, and feeds everything to 
 
 ## Download (recommended)
 
-The fastest path is the **native installer** for your platform from the [latest release](https://github.com/Durg5/drift-coach/releases/latest):
+The fastest path is the **native installer** for your platform from the [latest release](https://github.com/Durg5/fh6-drift-coach/releases/latest):
 
 | Platform | File |
 |---|---|
@@ -235,7 +235,7 @@ You only need the build toolchain ONE time. After that everyone you ship the ins
 **Build the installer:**
 
 ```bash
-git clone https://github.com/Durg5/drift-coach.git
+git clone https://github.com/Durg5/fh6-drift-coach.git
 cd drift-coach
 npm install
 npm run desktop:build
@@ -276,7 +276,7 @@ When the user double-clicks the app, the Rust wrapper picks a random free port, 
 If you don't want to follow the steps manually, paste **the entire block below** into a new Claude Code session and let it drive. It handles fresh installs, dependency checks, AI key setup prompts, and (optionally) the desktop build:
 
 ```
-I want to install and run Drift Coach from https://github.com/Durg5/drift-coach.
+I want to install and run Drift Coach from https://github.com/Durg5/fh6-drift-coach.
 
 Please drive the entire setup for me:
 

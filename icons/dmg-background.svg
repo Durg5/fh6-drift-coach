@@ -62,5 +62,5 @@
   <!-- Footer accent -->
   <text x="270" y="350" text-anchor="middle"
         font-family="Share Tech Mono, monospace" font-size="8"
-        letter-spacing="2" fill="#5C4F44">v0.1.0 · github.com/Durg5/drift-coach</text>
+        letter-spacing="2" fill="#5C4F44">v0.1.0 · github.com/Durg5/fh6-drift-coach</text>
 </svg>

@@ -125,7 +125,7 @@ jobs:
             - macOS users will need to right-click → Open the first time (Gatekeeper).
             - All app data lives at `~/.config/drift-coach/`. Web and desktop interop cleanly.
 
-            See the [README](https://github.com/Durg5/drift-coach/blob/main/README.md) for full setup, Forza Data Out configuration, and the workflow guide.
+            See the [README](https://github.com/Durg5/fh6-drift-coach/blob/main/README.md) for full setup, Forza Data Out configuration, and the workflow guide.
 
             *Built from `${{ github.sha }}`*.
           releaseDraft: false
