@@ -38,7 +38,6 @@
         "dialogImagePath": "icons/installer-dialog.png"
       },
       "nsis": {
-        "installerIcon": "icons/icon.ico",
         "headerImage": "icons/nsis-header.png",
         "sidebarImage": "icons/nsis-sidebar.png",
         "installMode": "perUser",
