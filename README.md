@@ -183,6 +183,114 @@ Nothing is sent to a central server. No telemetry, no analytics, no auth.
 
 ---
 
+## Desktop app (Windows / macOS / Linux installer)
+
+The web version is the primary mode — but you can also build a native desktop app that wraps the whole thing in a single installer. The user double-clicks an `.exe` / `.dmg` / `.deb` / `.AppImage`, the app launches, the Nuxt server runs as a hidden sidecar, and a native window opens to the dashboard.
+
+**Output size:** ~80-100 MB per platform (includes a portable Node.js + the Nuxt build + Tauri's tiny Rust wrapper that uses the OS's native webview, not Chromium).
+
+### Build it once
+
+You only need the build toolchain ONE time. After that everyone you ship the installer to gets a one-click install.
+
+**Prerequisites (one-time):**
+
+| Tool | Why | Install |
+|---|---|---|
+| Rust (1.77+) | Tauri's Rust core | https://rustup.rs/ |
+| Node 20+ | Already needed for the web build | https://nodejs.org/ |
+| Platform deps (Linux only) | webkit2gtk, libsoup, etc. | See [Tauri Linux prerequisites](https://v2.tauri.app/start/prerequisites/#linux) |
+
+**Build the installer:**
+
+```bash
+git clone https://github.com/Durg5/drift-coach.git
+cd drift-coach
+npm install
+npm run desktop:build
+```
+
+What it does:
+1. Downloads a portable Node.js binary for your platform → `src-tauri/binaries/node-sidecar-<target>`
+2. Renders icon set from `icons/icon-source.svg`
+3. Runs `nuxt build` → copies `.output/` into `src-tauri/nuxt/`
+4. Runs `cargo tauri build` → produces a native installer
+
+**Find your installer:**
+
+| Platform | Where it lands |
+|---|---|
+| Windows | `src-tauri/target/release/bundle/msi/Drift Coach_0.1.0_x64_en-US.msi` (and `.exe`) |
+| macOS | `src-tauri/target/release/bundle/dmg/Drift Coach_0.1.0_aarch64.dmg` (and `.app`) |
+| Linux | `src-tauri/target/release/bundle/deb/drift-coach_0.1.0_amd64.deb` and `appimage/Drift Coach_0.1.0_amd64.AppImage` |
+
+### Dev loop
+
+```bash
+npm run desktop:dev     # builds once and runs with hot-reloaded Rust on save
+```
+
+### What ships in the installer
+
+- The Tauri Rust binary (≈ 8 MB) — opens a webview window using the OS's native engine (WebView2 on Windows, WebKit on Mac, GTK-WebKit on Linux)
+- A portable Node.js binary (≈ 50 MB) — runs the embedded server as a sidecar process
+- The Nuxt build output (≈ 15 MB) — the actual app code, identical to the web version
+
+When the user double-clicks the app, the Rust wrapper picks a random free port, spawns the Node sidecar with `PORT=<that port>`, polls until the server answers, then opens the window to `http://127.0.0.1:<port>`. On close, the sidecar is killed. All user data (sessions / tunes / keys) still lives in `~/.config/drift-coach/` — identical to the web version, so users can switch between web and desktop without losing anything.
+
+---
+
+## "I just want to get this running" — paste this into Claude Code
+
+If you don't want to follow the steps manually, paste **the entire block below** into a new Claude Code session and let it drive. It handles fresh installs, dependency checks, AI key setup prompts, and (optionally) the desktop build:
+
+```
+I want to install and run Drift Coach from https://github.com/Durg5/drift-coach.
+
+Please drive the entire setup for me:
+
+1. Clone the repo to ~/drift-coach (create the parent dir if needed). If the
+   path already exists with the repo, do `git pull` instead.
+2. Read README.md to understand the project — surface the vibe-coded disclaimer
+   to me so I know what I'm getting into.
+3. Detect my OS. Run the appropriate installer from the repo root:
+     - macOS / Linux / WSL: ./install.sh
+     - Windows: .\install.ps1
+   The installer auto-picks free ports and builds the production bundle. Tell
+   me which port it picked.
+4. Ask me whether I want to add an AI provider key now or later. If now:
+     - Ask which provider (Ollama Cloud / Anthropic / OpenAI / local Ollama).
+     - Ask for the key, then write it to ~/.config/drift-coach/settings.json
+       (read README.md "Privacy" section for the exact shape).
+     - DO NOT echo the key back to me in the final summary.
+5. Ask whether I want a) just the web version, or b) also a native desktop
+   installer (.msi / .dmg / .deb).
+     - If web only: skip to step 7.
+     - If desktop: continue with step 6.
+6. Verify the desktop build toolchain:
+     - Check `rustc --version` (need 1.77+). If missing, install rustup
+       (https://rustup.rs) non-interactively and source the env.
+     - On Linux, check the webkit2gtk + libsoup prerequisites from the Tauri
+       Linux setup guide. Install via the system package manager if missing.
+   Then run `npm run desktop:build`. This takes 5-10 minutes on first run
+   (Rust compile + Node sidecar download + icon rasterize + Nuxt build).
+   At the end, tell me the exact path to the installer for my platform from
+   the table in README.md.
+7. Start the web server (`./start.sh` or `.\start.ps1`) in the background and
+   print the URL to open in a browser.
+8. Print a checklist of "things to do in Forza" from README.md step 4 so I
+   know how to point the game at the app.
+
+If anything fails, show me the error verbatim and pause before continuing.
+Don't skip the confirmation prompts in this list — I want to make decisions
+about provider keys and desktop vs web BEFORE you commit me to long
+operations.
+```
+
+Save that as a snippet — works for any fresh machine.
+
+---
+
 ## Stack
 
 - **Frontend**: Nuxt 4 (app/ dir), Vue 3, @nuxt/ui 3, Tailwind v4

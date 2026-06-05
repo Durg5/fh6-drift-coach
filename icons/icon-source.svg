@@ -1,0 +1,32 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Drift Coach app icon — drift-orange flame on dark square -->
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.55" r="0.65">
+      <stop offset="0" stop-color="#1a0a0a"/>
+      <stop offset="1" stop-color="#040206"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0" stop-color="#FF1744"/>
+      <stop offset="0.5" stop-color="#FF5500"/>
+      <stop offset="1" stop-color="#FFB300"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded-square dark background -->
+  <rect width="1024" height="1024" rx="192" ry="192" fill="url(#bg)"/>
+
+  <!-- Drift-orange accent stroke around the inside edge -->
+  <rect x="32" y="32" width="960" height="960" rx="172" ry="172"
+        fill="none" stroke="#FF5500" stroke-opacity="0.4" stroke-width="6"/>
+
+  <!-- Flame — simplified lucide-flame silhouette, scaled and centered -->
+  <g transform="translate(512, 540) scale(36) translate(-12, -12)">
+    <path
+      d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
+      fill="url(#flame)"
+      stroke="#FF5500"
+      stroke-width="0.4"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>

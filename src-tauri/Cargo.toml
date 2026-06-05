@@ -1,0 +1,29 @@
+[package]
+name = "drift-coach"
+version = "0.1.0"
+description = "Drift Coach desktop app — wraps the Nuxt server in a native webview"
+authors = ["Drift Coach contributors"]
+edition = "2021"
+rust-version = "1.77"
+
+# Binary that ends up bundled into the installer
+[[bin]]
+name = "drift-coach"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2.0", features = [] }
+
+[dependencies]
+tauri = { version = "2.0", features = [] }
+tauri-plugin-shell = "2.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+incremental = false
+opt-level = "s"
+strip = true

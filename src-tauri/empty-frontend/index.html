@@ -1,0 +1,8 @@
+<!--
+  Tauri requires `frontendDist` to point at something, but Drift Coach loads
+  its UI from the sidecar HTTP server, not from a bundled frontend. This file
+  exists so the Tauri builder doesn't error on the missing dist dir; it's
+  never actually loaded into a webview.
+-->
+<!doctype html>
+<title>Drift Coach</title>
