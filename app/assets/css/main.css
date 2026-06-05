@@ -1,0 +1,336 @@
+/* Bring in Tailwind utilities (needed for @nuxt/ui v3 layout helpers). */
+@import "tailwindcss";
+
+/* ===================================================
+   DRIFT COACH — design system
+   Dark racing / JDM neon aesthetic
+   Primary: drift-orange (#FF5500)
+   Data: cyan (#00CCFF)
+=================================================== */
+
+:root {
+  --c-bg:         #040206;
+  --c-surface:    #080410;
+  --c-surface-up: #0C0818;
+  --c-surface-top:#110D20;
+
+  /* Primary action / drift state */
+  --c-drift:      #FF5500;
+  --c-drift-dim:  rgba(255, 85, 0, 0.12);
+  --c-drift-glow: rgba(255, 85, 0, 0.30);
+
+  /* Data readouts */
+  --c-data:       #00CCFF;
+  --c-data-dim:   rgba(0, 204, 255, 0.10);
+  --c-data-glow:  rgba(0, 204, 255, 0.22);
+
+  /* Status colors */
+  --c-green:      #00E676;
+  --c-green-dim:  rgba(0, 230, 118, 0.10);
+  --c-amber:      #FFB300;
+  --c-amber-dim:  rgba(255, 179, 0, 0.10);
+  --c-red:        #FF1744;
+  --c-red-dim:    rgba(255, 23, 68, 0.10);
+
+  /* Borders */
+  --c-border:     rgba(255, 85, 0, 0.10);
+  --c-border-mid: rgba(255, 85, 0, 0.22);
+  --c-border-hot: rgba(255, 85, 0, 0.50);
+
+  /* Text */
+  --c-text:       #E8D8C8;
+  --c-text-mid:   #8A7A6A;   /* slightly brighter so muted labels stay legible */
+  --c-text-dim:   #5C4F44;   /* bumped from #2A1E14 — was almost invisible */
+
+  /* Dedicated placeholder tone — slightly brighter than text-dim,
+     because placeholders need to be clearly readable but not compete with content */
+  --c-placeholder: #6E5F52;
+
+  /* Fonts */
+  --font-display: 'Rajdhani', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+  --font-body:    'Exo 2', sans-serif;
+}
+
+/* NuxtUI override for dark mode dropdowns */
+.dark {
+  --ui-bg:          var(--c-surface-up);
+  --ui-bg-elevated: var(--c-surface-top);
+}
+[role="listbox"], [role="menu"] {
+  background-color: var(--c-surface-top) !important;
+  border: 1px solid var(--c-border-mid) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.8) !important;
+}
+
+/* ── Base ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: dark; }
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CRT scanline overlay — very subtle */
+html::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Card system ─────────────────────────────── */
+.dc-card {
+  position: relative;
+  background: linear-gradient(145deg, var(--c-surface) 0%, var(--c-surface-up) 100%);
+  border: 1px solid var(--c-border-mid);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dc-card .dc-topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--c-drift) 0%, transparent 70%);
+}
+
+.dc-card .dc-topbar--data {
+  background: linear-gradient(90deg, var(--c-data) 0%, transparent 70%);
+}
+
+/* Corner brackets */
+.dc-card .dc-b { position: absolute; width: 12px; height: 12px; pointer-events: none; z-index: 4; }
+.dc-card .dc-b--tl { top: 0; left: 0; border-top: 2px solid var(--c-drift); border-left: 2px solid var(--c-drift); }
+.dc-card .dc-b--tr { top: 0; right: 0; border-top: 2px solid var(--c-drift); border-right: 2px solid var(--c-drift); }
+.dc-card .dc-b--bl { bottom: 0; left: 0; border-bottom: 2px solid var(--c-drift); border-left: 2px solid var(--c-drift); }
+.dc-card .dc-b--br { bottom: 0; right: 0; border-bottom: 2px solid var(--c-drift); border-right: 2px solid var(--c-drift); }
+
+.dc-card .dc-b--data { border-color: var(--c-data) !important; }
+
+.dc-card .dc-label {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-text-mid);
+  padding: 0.3rem 0.65rem 0;
+}
+
+.dc-card .dc-body {
+  padding: 1.6rem 0.85rem 0.75rem;
+}
+
+/* Card glow variants */
+.dc-card--drift {
+  border-color: var(--c-border-mid);
+  box-shadow: 0 0 30px -8px var(--c-drift-glow);
+}
+.dc-card--drift.dc-active {
+  border-color: var(--c-drift);
+  box-shadow: 0 0 40px -4px var(--c-drift-glow), inset 0 0 60px -30px var(--c-drift-dim);
+}
+.dc-card--data {
+  border-color: rgba(0, 204, 255, 0.15);
+  box-shadow: 0 0 30px -8px var(--c-data-glow);
+}
+.dc-card--data .dc-b {
+  border-color: var(--c-data) !important;
+}
+.dc-card--data .dc-topbar { background: linear-gradient(90deg, var(--c-data) 0%, transparent 70%); }
+
+/* ── Labels & values ─────────────────────────── */
+.dc-lbl {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-mid);
+}
+
+.dc-val {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--c-data);
+}
+
+.dc-val--drift { color: var(--c-drift); }
+.dc-val--green { color: var(--c-green); }
+.dc-val--amber { color: var(--c-amber); }
+.dc-val--red   { color: var(--c-red);   }
+
+.dc-unit {
+  font-size: 0.65em;
+  opacity: 0.55;
+  margin-left: 0.1em;
+}
+
+/* ── Navigation tabs ─────────────────────────── */
+.dc-nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-mid);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  background: transparent;
+  cursor: pointer;
+}
+.dc-nav-tab:hover {
+  color: var(--c-text);
+  background: rgba(255, 85, 0, 0.06);
+  border-color: rgba(255, 85, 0, 0.15);
+}
+.dc-nav-tab--active {
+  color: var(--c-drift);
+  background: rgba(255, 85, 0, 0.10);
+  border-color: rgba(255, 85, 0, 0.30);
+}
+
+/* ── Drift state badge ───────────────────────── */
+.drift-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 85, 0, 0.30);
+  color: var(--c-text-mid);
+  background: transparent;
+  transition: all 0.12s ease;
+}
+.drift-badge--active {
+  color: var(--c-drift);
+  background: rgba(255, 85, 0, 0.12);
+  border-color: var(--c-drift);
+  box-shadow: 0 0 20px -4px var(--c-drift-glow);
+  animation: drift-pulse 0.8s ease-in-out infinite alternate;
+}
+@keyframes drift-pulse {
+  from { box-shadow: 0 0 12px -4px var(--c-drift-glow); }
+  to   { box-shadow: 0 0 28px -2px var(--c-drift-glow); }
+}
+
+/* ── Input bars ──────────────────────────────── */
+.dc-bar-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dc-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.06s ease;
+}
+
+/* ── Recording button ────────────────────────── */
+.rec-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 23, 68, 0.35);
+  background: rgba(255, 23, 68, 0.06);
+  color: var(--c-red);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+.rec-btn:hover { background: rgba(255, 23, 68, 0.12); border-color: var(--c-red); }
+.rec-btn--stop {
+  border-color: rgba(255, 23, 68, 0.5);
+  background: rgba(255, 23, 68, 0.12);
+}
+
+/* ── Chat bubbles ────────────────────────────── */
+.chat-user {
+  background: rgba(255, 85, 0, 0.06);
+  border: 1px solid rgba(255, 85, 0, 0.15);
+  border-radius: 8px 8px 4px 8px;
+  padding: 0.65rem 0.85rem;
+}
+.chat-ai {
+  background: rgba(0, 204, 255, 0.04);
+  border: 1px solid rgba(0, 204, 255, 0.12);
+  border-radius: 8px 8px 8px 4px;
+  padding: 0.65rem 0.85rem;
+}
+.chat-role {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+/* ── Stat chip ───────────────────────────────── */
+.stat-chip { display: flex; flex-direction: column; gap: 0.1rem; }
+.stat-chip-val {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--c-drift);
+}
+.stat-chip-lbl {
+  font-family: var(--font-display);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-text-mid);
+}
+
+/* ── Animated live dot ───────────────────────── */
+@keyframes live-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+.live-dot { animation: live-blink 1.2s ease-in-out infinite; }
+
+/* ── Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--c-surface); }
+::-webkit-scrollbar-thumb { background: rgba(255,85,0,0.25); border-radius: 2px; }
+
+/* ── Placeholder text — readable but unobtrusive ─ */
+input::placeholder, textarea::placeholder {
+  color: var(--c-placeholder);
+  opacity: 1;  /* override browser default fade */
+}

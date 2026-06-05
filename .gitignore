@@ -1,0 +1,25 @@
+# Dependencies + build outputs
+node_modules/
+.nuxt/
+.output/
+dist/
+
+# Environment + secrets — never commit ANY env file with real values.
+# .env.example is the only exception (template with empty values).
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local backups (e.g. ~/.config files accidentally dropped here for inspection)
+*.backup
+*.broken-backup
