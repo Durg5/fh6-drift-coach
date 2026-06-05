@@ -52,33 +52,4 @@
     <text x="600" y="0" fill="#E8D8C8">▎NATIVE DESKTOP</text>
   </g>
 
-  <!-- Right side: stylized data viz -->
-  <g transform="translate(960, 160)" opacity="0.8">
-    <!-- Drift angle gauge ring -->
-    <circle cx="120" cy="0" r="92" fill="none" stroke="#FF5500" stroke-opacity="0.18" stroke-width="2"/>
-    <circle cx="120" cy="0" r="76" fill="none" stroke="#FF5500" stroke-opacity="0.10" stroke-width="1" stroke-dasharray="3,3"/>
-    <path d="M 40 0 A 80 80 0 0 1 200 0"
-          fill="none" stroke="#FF5500" stroke-width="6" stroke-linecap="round"/>
-    <text x="120" y="6" text-anchor="middle" font-family="Share Tech Mono, monospace"
-          font-size="34" font-weight="700" fill="#FF5500">62°</text>
-    <text x="120" y="28" text-anchor="middle" font-family="Share Tech Mono, monospace"
-          font-size="9" letter-spacing="2" fill="#7A6A5A">DRIFT ANGLE</text>
-
-    <!-- Slip balance bar -->
-    <g transform="translate(0, 80)">
-      <text x="0"   y="-6" font-family="Share Tech Mono, monospace" font-size="8" fill="#7A6A5A" letter-spacing="2">UNDER ←</text>
-      <text x="240" y="-6" text-anchor="end" font-family="Share Tech Mono, monospace" font-size="8" fill="#7A6A5A" letter-spacing="2">→ OVER</text>
-      <rect x="0" y="0" width="240" height="6" rx="2" fill="#FF5500" fill-opacity="0.05" stroke="#FF5500" stroke-opacity="0.2" stroke-width="0.6"/>
-      <line x1="120" y1="-2" x2="120" y2="8" stroke="#E8D8C8" stroke-opacity="0.3"/>
-      <rect x="120" y="0" width="60" height="6" rx="2" fill="#FF5500"/>
-    </g>
-
-    <!-- Small data row -->
-    <g transform="translate(0, 110)" font-family="Share Tech Mono, monospace" font-size="9" letter-spacing="1">
-      <text x="0"   y="0" fill="#7A6A5A">CHAIN</text>
-      <text x="50"  y="0" fill="#00E676" font-weight="700">14.3s</text>
-      <text x="110" y="0" fill="#7A6A5A">PEAK G</text>
-      <text x="170" y="0" fill="#FFB300" font-weight="700">8.4</text>
-    </g>
-  </g>
 </svg>
