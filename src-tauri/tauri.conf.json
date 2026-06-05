@@ -40,7 +40,7 @@
       "nsis": {
         "headerImage": "icons/nsis-header.png",
         "sidebarImage": "icons/nsis-sidebar.png",
-        "installMode": "perUser",
+        "installMode": "currentUser",
         "displayLanguageSelector": false
       }
     },
