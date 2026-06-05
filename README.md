@@ -70,15 +70,15 @@ Installers are unsigned for now (free), so Windows shows SmartScreen and macOS s
 
 **Linux / macOS / WSL:**
 ```bash
-git clone https://github.com/YOUR-USERNAME/drift-coach.git
-cd drift-coach
+git clone https://github.com/Durg5/fh6-drift-coach.git
+cd fh6-drift-coach
 ./install.sh
 ```
 
 **Windows (PowerShell):**
 ```powershell
-git clone https://github.com/YOUR-USERNAME/drift-coach.git
-cd drift-coach
+git clone https://github.com/Durg5/fh6-drift-coach.git
+cd fh6-drift-coach
 .\install.ps1
 ```
 
@@ -236,7 +236,7 @@ You only need the build toolchain ONE time. After that everyone you ship the ins
 
 ```bash
 git clone https://github.com/Durg5/fh6-drift-coach.git
-cd drift-coach
+cd fh6-drift-coach
 npm install
 npm run desktop:build
 ```
@@ -280,7 +280,7 @@ I want to install and run Drift Coach from https://github.com/Durg5/fh6-drift-co
 
 Please drive the entire setup for me:
 
-1. Clone the repo to ~/drift-coach (create the parent dir if needed). If the
+1. Clone the repo to ~/fh6-drift-coach (create the parent dir if needed). If the
    path already exists with the repo, do `git pull` instead.
 2. Read README.md to understand the project — surface the vibe-coded disclaimer
    to me so I know what I'm getting into.
