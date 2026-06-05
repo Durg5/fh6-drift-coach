@@ -53,7 +53,7 @@
   </g>
 
   <!-- Right side: stylized data viz -->
-  <g transform="translate(900, 160)" opacity="0.8">
+  <g transform="translate(960, 160)" opacity="0.8">
     <!-- Drift angle gauge ring -->
     <circle cx="120" cy="0" r="92" fill="none" stroke="#FF5500" stroke-opacity="0.18" stroke-width="2"/>
     <circle cx="120" cy="0" r="76" fill="none" stroke="#FF5500" stroke-opacity="0.10" stroke-width="1" stroke-dasharray="3,3"/>

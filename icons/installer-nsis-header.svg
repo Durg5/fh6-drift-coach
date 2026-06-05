@@ -30,7 +30,7 @@
   </g>
 
   <text x="46" y="29" font-family="Rajdhani, Arial, sans-serif" font-size="14" font-weight="700"
-        letter-spacing="2" fill="#E8D8C8">DRIFT<tspan fill="#FF5500"> COACH</tspan></text>
+        letter-spacing="0" fill="#E8D8C8">DRIFT<tspan fill="#FF5500"> COACH</tspan></text>
   <text x="46" y="42" font-family="Share Tech Mono, monospace" font-size="6"
         letter-spacing="1.5" fill="#7A6A5A">FORZA TELEMETRY · AI</text>
 </svg>
