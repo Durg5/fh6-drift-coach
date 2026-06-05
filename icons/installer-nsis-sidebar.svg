@@ -1,0 +1,64 @@
+<svg width="164" height="314" viewBox="0 0 164 314" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    NSIS welcome / finish vertical sidebar (164×314).
+  -->
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.4" r="0.9">
+      <stop offset="0" stop-color="#110D20"/>
+      <stop offset="0.5" stop-color="#0C0818"/>
+      <stop offset="1" stop-color="#040206"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0" stop-color="#FF1744"/>
+      <stop offset="0.5" stop-color="#FF5500"/>
+      <stop offset="1" stop-color="#FFB300"/>
+    </linearGradient>
+    <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse">
+      <path d="M22 0 L0 0 0 22" fill="none" stroke="#FF5500" stroke-opacity="0.05" stroke-width="0.4"/>
+    </pattern>
+  </defs>
+
+  <rect width="164" height="314" fill="url(#bg)"/>
+  <rect width="164" height="314" fill="url(#grid)"/>
+  <rect x="0" y="0" width="3" height="314" fill="#FF5500" opacity="0.6"/>
+
+  <!-- Centered flame badge -->
+  <g transform="translate(54, 60)">
+    <rect width="56" height="56" rx="11" ry="11"
+          fill="#FF5500" fill-opacity="0.08"
+          stroke="#FF5500" stroke-width="2.2"/>
+    <g transform="translate(28, 32) scale(1.6) translate(-12, -12)">
+      <path
+        d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
+        fill="url(#flame)"/>
+    </g>
+  </g>
+
+  <text x="82" y="155" text-anchor="middle"
+        font-family="Rajdhani, Arial, sans-serif" font-size="24" font-weight="700"
+        letter-spacing="3" fill="#E8D8C8">DRIFT</text>
+  <text x="82" y="180" text-anchor="middle"
+        font-family="Rajdhani, Arial, sans-serif" font-size="24" font-weight="700"
+        letter-spacing="3" fill="#FF5500">COACH</text>
+
+  <text x="82" y="210" text-anchor="middle"
+        font-family="Share Tech Mono, monospace" font-size="7"
+        letter-spacing="1.5" fill="#7A6A5A">FORZA TELEMETRY</text>
+  <text x="82" y="222" text-anchor="middle"
+        font-family="Share Tech Mono, monospace" font-size="7"
+        letter-spacing="1.5" fill="#7A6A5A">AI DRIFT TUNING</text>
+
+  <!-- Data ticks at the bottom -->
+  <g transform="translate(40, 270)" stroke="#00CCFF" stroke-width="0.6" opacity="0.6">
+    <line x1="0"  y1="0" x2="84" y2="0"/>
+    <line x1="0"  y1="-4" x2="0"  y2="4"/>
+    <line x1="20" y1="-4" x2="20" y2="4"/>
+    <line x1="42" y1="-6" x2="42" y2="6"/>
+    <line x1="64" y1="-4" x2="64" y2="4"/>
+    <line x1="84" y1="-4" x2="84" y2="4"/>
+  </g>
+
+  <text x="82" y="296" text-anchor="middle"
+        font-family="Share Tech Mono, monospace" font-size="6"
+        letter-spacing="1.5" fill="#5C4F44">v0.1.0 · MIT</text>
+</svg>

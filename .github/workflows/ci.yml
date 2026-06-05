@@ -1,0 +1,26 @@
+# Light CI — runs on every push/PR to verify the Nuxt web build still compiles.
+# Doesn't build Tauri; that's only on tag pushes via release.yml.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  web-build:
+    name: Web build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci || npm install
+      - run: npm run build
+      - name: Confirm .output exists
+        run: test -f .output/server/index.mjs && echo "OK"

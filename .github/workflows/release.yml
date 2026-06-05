@@ -1,0 +1,133 @@
+# Release pipeline — runs on every tag push that matches v*.*.* and produces
+# native installers for Windows / macOS (Intel + Apple Silicon) / Linux,
+# uploading them as artifacts on a GitHub Release.
+#
+# Trigger:
+#   git tag v0.1.0 && git push origin v0.1.0
+#
+# Output (per platform):
+#   Windows  — Drift Coach_<v>_x64_en-US.msi  + Drift Coach_<v>_x64-setup.exe
+#   macOS    — Drift Coach_<v>_aarch64.dmg     + Drift Coach_<v>_x64.dmg
+#   Linux    — drift-coach_<v>_amd64.deb        + Drift Coach_<v>_amd64.AppImage
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # required to create/edit Releases
+
+jobs:
+  build-tauri:
+    name: Build (${{ matrix.platform }} - ${{ matrix.target }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux
+            os: ubuntu-22.04
+            target: x86_64-unknown-linux-gnu
+            rust-target: x86_64-unknown-linux-gnu
+          - platform: macos
+            os: macos-14
+            target: aarch64-apple-darwin
+            rust-target: aarch64-apple-darwin
+          - platform: macos
+            os: macos-13
+            target: x86_64-apple-darwin
+            rust-target: x86_64-apple-darwin
+          - platform: windows
+            os: windows-latest
+            target: x86_64-pc-windows-msvc
+            rust-target: x86_64-pc-windows-msvc
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.rust-target }}
+
+      - name: Cargo cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+
+      - name: Linux system deps
+        if: matrix.platform == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.1-dev \
+            libsoup-3.0-dev \
+            librsvg2-dev \
+            libssl-dev \
+            patchelf
+
+      - name: npm install
+        run: npm ci || npm install
+
+      - name: Prepare Node sidecar (download + rename per Tauri target triple)
+        shell: bash
+        run: |
+          # On the runner we know our host triple; reuse the prep script.
+          if [[ "${{ matrix.platform }}" == "windows" ]]; then
+            powershell -ExecutionPolicy Bypass -File scripts/prepare-sidecar.ps1
+          else
+            bash scripts/prepare-sidecar.sh
+          fi
+          ls -la src-tauri/binaries
+
+      - name: Build Tauri installer
+        uses: tauri-apps/tauri-action@v0
+        env:
+          # No code signing for the unpublished v0.1; users get a SmartScreen
+          # prompt on Windows. To sign: add these secrets to the repo and
+          # uncomment the appropriate env vars below.
+          # WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
+          # WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+          # APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          # APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          # APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          # APPLE_ID: ${{ secrets.APPLE_ID }}
+          # APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          # APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "Drift Coach ${{ github.ref_name }}"
+          releaseBody: |
+            **Drift Coach ${{ github.ref_name }}**
+
+            Self-hosted Forza Horizon 6/5 telemetry dashboard with an AI drift-tuning coach.
+
+            ## Downloads
+            Pick the installer for your platform below:
+
+            - **Windows** — `.msi` (recommended) or `.exe` setup
+            - **macOS** — `.dmg` for Apple Silicon (M1+) or Intel
+            - **Linux** — `.AppImage` (portable) or `.deb` (Debian/Ubuntu)
+
+            ## Install notes
+            - Windows users will see a SmartScreen warning because the build is not code-signed. Click **More info → Run anyway**.
+            - macOS users will need to right-click → Open the first time (Gatekeeper).
+            - All app data lives at `~/.config/drift-coach/`. Web and desktop interop cleanly.
+
+            See the [README](https://github.com/Durg5/drift-coach/blob/main/README.md) for full setup, Forza Data Out configuration, and the workflow guide.
+
+            *Built from `${{ github.sha }}`*.
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.platform == 'macos' && format('--target {0}', matrix.rust-target) || '' }}

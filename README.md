@@ -1,8 +1,23 @@
+<div align="center">
+
+![Drift Coach](icons/readme-hero.png)
+
 # Drift Coach
 
-A self-hosted Forza Horizon 6 / FH5 telemetry dashboard + AI drift-tuning coach.
-Records sessions, builds a per-car dyno from your runs, and feeds everything
-to an LLM (Ollama, Claude, OpenAI) that knows drift tuning specifically.
+**Self-hosted Forza Horizon 6 / FH5 telemetry dashboard + AI drift-tuning coach.**
+
+[![Release](https://img.shields.io/github/v/release/Durg5/drift-coach?style=flat-square&color=ff5500&label=release)](https://github.com/Durg5/drift-coach/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/Durg5/drift-coach/ci.yml?style=flat-square&label=build)](https://github.com/Durg5/drift-coach/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/Durg5/drift-coach?style=flat-square&color=00ccff)](LICENSE)
+[![Stack](https://img.shields.io/badge/stack-Nuxt%204%20%C2%B7%20Tauri%202-040206?style=flat-square)](#stack)
+
+Records sessions, builds a per-car dyno from your runs, and feeds everything to an LLM (Ollama, Claude, OpenAI) that knows drift tuning specifically.
+
+[**Download installer**](https://github.com/Durg5/drift-coach/releases/latest) · [**Quick start**](#quick-start-5-minutes-from-clone-to-driving) · [**First clean run guide**](#your-first-clean-run--step-by-step) · [**What weird features do**](#what-the-weird-named-features-actually-do)
+
+</div>
+
+---
 
 > ⚠️ **Vibe-coded disclaimer.**
 > This whole project was built collaboratively with an LLM over a couple of
@@ -10,6 +25,22 @@ to an LLM (Ollama, Claude, OpenAI) that knows drift tuning specifically.
 > features may not work 100% on yours — different hardware, OSes, AI providers,
 > or Forza configurations can surface edge cases. Treat it as a power-user toy,
 > not a polished product. PRs welcome.
+
+## Download (recommended)
+
+The fastest path is the **native installer** for your platform from the [latest release](https://github.com/Durg5/drift-coach/releases/latest):
+
+| Platform | File |
+|---|---|
+| **Windows** | `Drift Coach_x.y.z_x64_en-US.msi` (recommended) or the `.exe` setup |
+| **macOS (Apple Silicon)** | `Drift Coach_x.y.z_aarch64.dmg` |
+| **macOS (Intel)** | `Drift Coach_x.y.z_x64.dmg` |
+| **Linux (any distro)** | `Drift Coach_x.y.z_amd64.AppImage` — `chmod +x`, double-click |
+| **Linux (Debian/Ubuntu)** | `drift-coach_x.y.z_amd64.deb` |
+
+Installers are unsigned for now (free), so Windows shows SmartScreen and macOS shows Gatekeeper on first launch — bypass once and you're set. Source is open if you'd rather build from scratch (see [Build from source](#desktop-app-windows--macos--linux-installer)).
+
+---
 
 ---
 

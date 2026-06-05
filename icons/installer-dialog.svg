@@ -1,0 +1,66 @@
+<svg width="493" height="312" viewBox="0 0 493 312" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    WiX MSI welcome / finish dialog image (493×312).
+    The MSI shows this on the first and last screens of the install wizard.
+  -->
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.55" r="0.85">
+      <stop offset="0" stop-color="#110D20"/>
+      <stop offset="0.5" stop-color="#0C0818"/>
+      <stop offset="1" stop-color="#040206"/>
+    </radialGradient>
+    <linearGradient id="flame" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0" stop-color="#FF1744"/>
+      <stop offset="0.5" stop-color="#FF5500"/>
+      <stop offset="1" stop-color="#FFB300"/>
+    </linearGradient>
+    <linearGradient id="topline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#FF5500" stop-opacity="1"/>
+      <stop offset="0.6"  stop-color="#FF5500" stop-opacity="0.4"/>
+      <stop offset="1"    stop-color="#FF5500" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0 L0 0 0 32" fill="none" stroke="#FF5500" stroke-opacity="0.05" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <rect width="493" height="312" fill="url(#bg)"/>
+  <rect width="493" height="312" fill="url(#grid)"/>
+  <rect y="0" width="493" height="3" fill="url(#topline)"/>
+
+  <!-- Big flame badge, centered upper third -->
+  <g transform="translate(220, 60)">
+    <rect width="72" height="72" rx="14" ry="14"
+          fill="#FF5500" fill-opacity="0.08"
+          stroke="#FF5500" stroke-width="2.5"/>
+    <g transform="translate(36, 40) scale(2) translate(-12, -12)">
+      <path
+        d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"
+        fill="url(#flame)"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="246" y="170" text-anchor="middle"
+        font-family="Rajdhani, Arial, sans-serif" font-size="38" font-weight="700"
+        letter-spacing="5" fill="#E8D8C8">DRIFT<tspan fill="#FF5500"> COACH</tspan></text>
+
+  <!-- Tagline lines -->
+  <text x="246" y="200" text-anchor="middle"
+        font-family="Share Tech Mono, monospace" font-size="11"
+        letter-spacing="3" fill="#7A6A5A">FORZA HORIZON · TELEMETRY · AI TUNING</text>
+
+  <!-- Decorative data ticks lower -->
+  <g transform="translate(146, 250)" stroke="#00CCFF" stroke-width="0.8">
+    <line x1="0"   y1="0" x2="200" y2="0" opacity="0.3"/>
+    <line x1="10"  y1="-4" x2="10"  y2="4" opacity="0.6"/>
+    <line x1="50"  y1="-4" x2="50"  y2="4" opacity="0.6"/>
+    <line x1="100" y1="-6" x2="100" y2="6" opacity="0.9"/>
+    <line x1="150" y1="-4" x2="150" y2="4" opacity="0.6"/>
+    <line x1="190" y1="-4" x2="190" y2="4" opacity="0.6"/>
+  </g>
+
+  <text x="246" y="275" text-anchor="middle"
+        font-family="Share Tech Mono, monospace" font-size="9"
+        letter-spacing="2" fill="#5C4F44">v0.1.0 · MIT LICENSE · github.com/Durg5/drift-coach</text>
+</svg>

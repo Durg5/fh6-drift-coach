@@ -7,16 +7,14 @@
     "dev": "nuxt dev --port 3002",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-
     "desktop:prep:unix": "bash scripts/prepare-sidecar.sh",
-    "desktop:prep:win":  "powershell -ExecutionPolicy Bypass -File scripts/prepare-sidecar.ps1",
-    "desktop:prep":      "node -e \"process.exit(process.platform === 'win32' ? 0 : 1)\" && npm run desktop:prep:win || npm run desktop:prep:unix",
-
-    "desktop:icons":     "node scripts/gen-icons.mjs",
+    "desktop:prep:win": "powershell -ExecutionPolicy Bypass -File scripts/prepare-sidecar.ps1",
+    "desktop:prep": "node -e \"process.exit(process.platform === 'win32' ? 0 : 1)\" && npm run desktop:prep:win || npm run desktop:prep:unix",
+    "desktop:icons": "node scripts/gen-icons.mjs",
     "desktop:copy-nuxt": "node scripts/copy-nuxt.mjs",
-    "desktop:prebuild":  "npm run build && npm run desktop:copy-nuxt",
-    "desktop:dev":       "tauri dev",
-    "desktop:build":     "npm run desktop:prep && npm run desktop:icons && tauri build"
+    "desktop:prebuild": "npm run build && npm run desktop:copy-nuxt",
+    "desktop:dev": "tauri dev",
+    "desktop:build": "npm run desktop:prep && npm run desktop:icons && tauri build"
   },
   "dependencies": {
     "@nuxt/ui": "^3.0.0",
@@ -25,7 +23,7 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.0.0",
-    "sharp": "^0.33.0"
+    "@tauri-apps/cli": "^2.11.2",
+    "sharp": "^0.33.5"
   }
 }
