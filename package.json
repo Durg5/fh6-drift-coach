@@ -14,7 +14,8 @@
     "desktop:copy-nuxt": "node scripts/copy-nuxt.mjs",
     "desktop:prebuild": "npm run build && npm run desktop:copy-nuxt",
     "desktop:dev": "tauri dev",
-    "desktop:build": "npm run desktop:prep && npm run desktop:icons && tauri build"
+    "desktop:build": "npm run desktop:prep && npm run desktop:icons && tauri build",
+    "tauri": "tauri"
   },
   "dependencies": {
     "@nuxt/ui": "^3.0.0",
